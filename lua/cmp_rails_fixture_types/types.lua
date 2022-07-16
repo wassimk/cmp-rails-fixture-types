@@ -7,18 +7,25 @@ end
 local rails_fixture_types = {}
 
 function rails_fixture_types.all()
-  local fixtures_dir = './test/fixtures'
+  local fixture_dirs = { './test/fixtures', './spec/fixtures' }
 
+  fixture_dirs = vim.tbl_filter(function(dir)
+    return vim.fn.isdirectory(dir) == 1
+  end, fixture_dirs)
+
+  local types = {}
   local success, types = pcall(function()
-    local types = {}
-    local files = scan.scan_dir(fixtures_dir, { search_pattern = '.yml', respect_gitignore = true,
+    local files = scan.scan_dir(fixture_dirs, { search_pattern = '.yml', respect_gitignore = true,
       silent = true })
 
-    for _, file in ipairs(files) do
-      local type = file:match(fixtures_dir .. '/(.+)%.yml$')
-      type = type:gsub('/', '_')
+    local types = {}
+    for _, file in pairs(files) do
+      for _, fixture_dir in pairs(fixture_dirs) do
+        local type = file:match(fixture_dir .. '/(.+)%.yml$')
+        type = type:gsub('/', '_')
 
-      table.insert(types, type)
+        table.insert(types, type)
+      end
     end
 
     return types
