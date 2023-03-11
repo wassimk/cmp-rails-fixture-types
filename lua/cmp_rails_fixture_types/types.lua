@@ -4,19 +4,20 @@ if not has_scan then
   return
 end
 
-local rails_fixture_types = {}
+local M = {}
 
-function rails_fixture_types.all()
+function M.all()
   local fixture_dirs = { './test/fixtures', './spec/fixtures' }
 
   fixture_dirs = vim.tbl_filter(function(dir)
     return vim.fn.isdirectory(dir) == 1
   end, fixture_dirs)
 
-  local types = {}
   local success, types = pcall(function()
-    local files = scan.scan_dir(fixture_dirs, { search_pattern = '.yml', respect_gitignore = true,
-      silent = true })
+    local files = scan.scan_dir(
+      fixture_dirs,
+      { search_pattern = '.yml', respect_gitignore = true, silent = true }
+    )
 
     local types = {}
     for _, file in pairs(files) do
@@ -37,4 +38,4 @@ function rails_fixture_types.all()
   return types
 end
 
-return rails_fixture_types
+return M

@@ -1,18 +1,19 @@
 local types = require('cmp_rails_fixture_types.types')
 
-local source = {}
+local M = {}
 
-source.new = function()
-  return setmetatable({}, { __index = source })
+M.new = function()
+  return setmetatable({}, { __index = M })
 end
 
-source.is_available = function()
+M.is_available = function()
   local current_buffer_path = vim.fn.expand('%')
 
-  return vim.startswith(current_buffer_path, 'test/') or vim.startswith(current_buffer_path, 'spec/')
+  return vim.startswith(current_buffer_path, 'test/')
+    or vim.startswith(current_buffer_path, 'spec/')
 end
 
-source.complete = function(_, request, callback)
+M.complete = function(_, _, callback)
   local results = {}
 
   for _, type in ipairs(types.all()) do
@@ -26,4 +27,4 @@ source.complete = function(_, request, callback)
   callback(results)
 end
 
-return source
+return M
