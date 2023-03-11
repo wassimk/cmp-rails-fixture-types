@@ -45,14 +45,3 @@ require('cmp').setup {
   -- ...
 }
 ```
-
-## Roadmap
-
-This is just a wish list. The source works perfectly for my current use case, so I'll unlikely work
-on any of these without a need:
-
-- [x] Add companion plugin to auto-complete fixture names with documentation
-- [x] Only trigger in Ruby file types
-- [ ] Prevent crashing if **nvim-cmp** not loaded first
-- [ ] Configurable fixture folder
-- [ ] Configurable option to parse the yaml erb files with the rails runner
