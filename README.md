@@ -1,3 +1,5 @@
+> **Deprecated:** This plugin is no longer maintained. Use [rails-fixture-complete.nvim](https://github.com/wassimk/rails-fixture-complete.nvim) instead, which supports both blink.cmp and nvim-cmp natively.
+
 # cmp-rails-fixture-types
 
 This plugin is a source for [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) to complete Ruby on Rails fixture **types**. Types meaning the object each fixture represents. So a `User` model would have a `users` fixture type.
